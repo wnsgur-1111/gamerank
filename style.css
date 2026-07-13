@@ -1,0 +1,416 @@
+/* ================================================
+   style.css — GameRank 스팀 신작 랭킹 사이트
+   ================================================ */
+
+/* ===== 1. CSS 변수 (라이트 모드 기본) ===== */
+:root {
+  --bg:            #edecea;
+  --surface:       #ffffff;
+  --surface2:      #f0efec;
+  --border:        rgba(0, 0, 0, 0.18);
+  --border-strong: rgba(0, 0, 0, 0.28);
+  --text-primary:  #111110;
+  --text-secondary:#444440;
+  --text-muted:    #777770;
+  --accent:        #1254e8;
+  --accent-light:  #dce8ff;
+  --rank-gold:     #b07c00;
+  --rank-silver:   #5a6a7a;
+  --rank-bronze:   #8a4e20;
+  --tag-bg:        #e0dedd;
+  --tag-text:      #333330;
+  --up:            #1a7a40;
+  --down:          #c02020;
+  --new-color:     #1254e8;
+  --hot-color:     #c84010;
+}
+
+/* ===== 2. 다크 모드 변수 ===== */
+[data-theme="dark"] {
+  --bg:            #111110;
+  --surface:       #1c1c1a;
+  --surface2:      #252523;
+  --border:        rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --text-primary:  #f0ede8;
+  --text-secondary:#b0ada8;
+  --text-muted:    #777770;
+  --accent:        #4d8aff;
+  --accent-light:  rgba(77, 138, 255, 0.14);
+  --rank-gold:     #f0b429;
+  --rank-silver:   #a0b0bf;
+  --rank-bronze:   #c87840;
+  --tag-bg:        #2a2a28;
+  --tag-text:      #c0bdb8;
+  --up:            #2db860;
+  --down:          #f05050;
+  --new-color:     #4d8aff;
+  --hot-color:     #f06030;
+}
+
+/* ===== 3. 리셋 & 기본 ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:  var(--bg);
+  color:       var(--text-primary);
+  font-family: 'Noto Sans KR', sans-serif;
+  transition:  background 0.2s, color 0.2s;
+  min-height:  100vh;
+  padding-bottom: 3rem;
+}
+
+/* ===== 4. 헤더 ===== */
+.header {
+  background:    var(--surface);
+  border-bottom: 1.5px solid var(--border-strong);
+  padding:       0 2rem;
+  position:      sticky;
+  top:           0;
+  z-index:       100;
+}
+
+.header-inner {
+  max-width:      1100px;
+  margin:         0 auto;
+  display:        flex;
+  align-items:    center;
+  justify-content:space-between;
+  height:         56px;
+}
+
+.logo {
+  font-family:  'Rajdhani', sans-serif;
+  font-weight:  700;
+  font-size:    22px;
+  letter-spacing: -0.5px;
+  color:        var(--text-primary);
+  display:      flex;
+  align-items:  center;
+  gap:          8px;
+}
+
+.logo-dot {
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    var(--accent);
+  display:       inline-block;
+}
+
+.steam-badge {
+  font-size:      11px;
+  font-weight:    700;
+  color:          var(--text-muted);
+  background:     var(--tag-bg);
+  border:         1px solid var(--border);
+  border-radius:  4px;
+  padding:        2px 7px;
+  margin-left:    4px;
+  letter-spacing: 0.5px;
+}
+
+.theme-btn {
+  width:         36px;
+  height:        36px;
+  border-radius: 8px;
+  border:        1.5px solid var(--border-strong);
+  background:    var(--surface2);
+  cursor:        pointer;
+  display:       flex;
+  align-items:   center;
+  justify-content:center;
+  font-size:     16px;
+  color:         var(--text-secondary);
+  transition:    background 0.15s;
+}
+
+.theme-btn:hover {
+  background: var(--tag-bg);
+}
+
+/* ===== 5. 메인 영역 ===== */
+.main {
+  max-width: 1100px;
+  margin:    0 auto;
+  padding:   2rem 2rem 0;
+}
+
+.page-title {
+  font-family:    'Rajdhani', sans-serif;
+  font-size:      28px;
+  font-weight:    700;
+  letter-spacing: -0.5px;
+  color:          var(--text-primary);
+  margin-bottom:  0.2rem;
+}
+
+.page-sub {
+  font-size:     13px;
+  color:         var(--text-muted);
+  margin-bottom: 1.75rem;
+}
+
+/* ===== 6. 필터 컨트롤 ===== */
+.controls {
+  display:     flex;
+  gap:         12px;
+  flex-wrap:   wrap;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+/* 기간 탭 그룹 */
+.tab-group {
+  display:       flex;
+  background:    var(--surface);
+  border:        1.5px solid var(--border-strong);
+  border-radius: 8px;
+  padding:       3px;
+  gap:           2px;
+}
+
+.tab {
+  padding:       6px 16px;
+  border-radius: 6px;
+  font-size:     13px;
+  font-weight:   500;
+  cursor:        pointer;
+  color:         var(--text-secondary);
+  transition:    all 0.15s;
+  border:        none;
+  background:    transparent;
+}
+
+.tab.active {
+  background: var(--accent);
+  color:      #fff;
+}
+
+.tab:hover:not(.active) {
+  background: var(--surface2);
+  color:      var(--text-primary);
+}
+
+/* 장르 필터 */
+.genre-tabs {
+  display:   flex;
+  gap:       6px;
+  flex-wrap: wrap;
+}
+
+.genre-tag {
+  padding:       6px 14px;
+  border-radius: 20px;
+  font-size:     12px;
+  font-weight:   700;
+  cursor:        pointer;
+  border:        1.5px solid var(--border-strong);
+  background:    var(--surface);
+  color:         var(--text-secondary);
+  transition:    all 0.15s;
+}
+
+.genre-tag.active {
+  border-color: var(--accent);
+  background:   var(--accent);
+  color:        #fff;
+}
+
+.genre-tag:hover:not(.active) {
+  border-color: var(--text-muted);
+  color:        var(--text-primary);
+  background:   var(--surface2);
+}
+
+/* ===== 7. 랭킹 테이블 ===== */
+.rank-table {
+  background:    var(--surface);
+  border:        1.5px solid var(--border-strong);
+  border-radius: 12px;
+  overflow:      hidden;
+}
+
+.rank-header {
+  display:               grid;
+  grid-template-columns: 52px 1fr 120px 110px 100px 90px;
+  padding:               10px 20px;
+  border-bottom:         1.5px solid var(--border-strong);
+  font-size:             11px;
+  font-weight:           700;
+  color:                 var(--text-secondary);
+  letter-spacing:        0.5px;
+  text-transform:        uppercase;
+  background:            var(--surface2);
+}
+
+.rank-row {
+  display:               grid;
+  grid-template-columns: 52px 1fr 120px 110px 100px 90px;
+  padding:               14px 20px;
+  border-bottom:         1px solid var(--border);
+  align-items:           center;
+  transition:            background 0.1s;
+  cursor:                pointer;
+}
+
+.rank-row:last-child {
+  border-bottom: none;
+}
+
+.rank-row:hover {
+  background: var(--surface2);
+}
+
+/* 순위 번호 */
+.rank-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size:   22px;
+  font-weight: 700;
+  color:       var(--text-muted);
+}
+
+.rank-1 .rank-num { color: var(--rank-gold); }
+.rank-2 .rank-num { color: var(--rank-silver); }
+.rank-3 .rank-num { color: var(--rank-bronze); }
+
+/* 게임 정보 셀 */
+.game-info {
+  display:     flex;
+  align-items: center;
+  gap:         12px;
+}
+
+.game-thumb {
+  width:           64px;
+  height:          36px;
+  border-radius:   5px;
+  background:      var(--surface2);
+  flex-shrink:     0;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       20px;
+  border:          1.5px solid var(--border-strong);
+}
+
+.game-name {
+  font-size:     14px;
+  font-weight:   700;
+  color:         var(--text-primary);
+  margin-bottom: 5px;
+  line-height:   1.2;
+}
+
+.game-tags {
+  display:   flex;
+  gap:       4px;
+  flex-wrap: wrap;
+}
+
+/* ===== 8. 태그 & 배지 ===== */
+.tag {
+  font-size:     10px;
+  font-weight:   700;
+  padding:       2px 7px;
+  border-radius: 3px;
+  background:    var(--tag-bg);
+  color:         var(--tag-text);
+  border:        1px solid var(--border);
+}
+
+.badge-new {
+  background:   var(--accent-light);
+  color:        var(--new-color);
+  border-color: var(--new-color);
+}
+
+.badge-hot {
+  background:   #ffe8e0;
+  color:        var(--hot-color);
+  border-color: var(--hot-color);
+}
+
+[data-theme="dark"] .badge-hot {
+  background: rgba(200, 64, 16, 0.18);
+}
+
+/* ===== 9. 수치 값 ===== */
+.col-val {
+  font-size:   13px;
+  color:       var(--text-secondary);
+  font-weight: 500;
+}
+
+.col-val.big {
+  font-family: 'Rajdhani', sans-serif;
+  font-size:   16px;
+  font-weight: 700;
+  color:       var(--text-primary);
+}
+
+/* ===== 10. 순위 변동 ===== */
+.change {
+  display:     flex;
+  align-items: center;
+  gap:         3px;
+  font-size:   12px;
+  font-weight: 700;
+}
+
+.change.up        { color: var(--up); }
+.change.down      { color: var(--down); }
+.change.new-badge { color: var(--new-color); }
+.change.same      { color: var(--text-muted); }
+
+/* ===== 11. 평점 바 ===== */
+.score-bar {
+  display:        flex;
+  flex-direction: column;
+  gap:            4px;
+}
+
+.score-num {
+  font-size:   13px;
+  font-weight: 700;
+  color:       var(--text-primary);
+}
+
+.score-track {
+  width:         70px;
+  height:        5px;
+  background:    var(--tag-bg);
+  border-radius: 3px;
+  overflow:      hidden;
+  border:        1px solid var(--border);
+}
+
+.score-fill          { height: 100%; border-radius: 3px; }
+.score-fill.hi       { background: var(--up); }
+.score-fill.mid      { background: var(--rank-gold); }
+.score-fill.lo       { background: var(--down); }
+
+/* ===== 12. 빈 상태 ===== */
+.empty {
+  padding:    3rem;
+  text-align: center;
+  color:      var(--text-muted);
+  font-size:  14px;
+}
+
+/* ===== 13. 반응형 (모바일) ===== */
+@media (max-width: 700px) {
+  .header { padding: 0 1rem; }
+  .main   { padding: 1rem 1rem 0; }
+
+  .rank-header,
+  .rank-row {
+    grid-template-columns: 40px 1fr 90px 80px;
+  }
+
+  .col-hide { display: none; }
+}
