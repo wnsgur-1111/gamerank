@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameRank — 스팀 신작 게임 랭킹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="app">
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        GameRank
+        <span class="steam-badge">STEAM</span>
+      </div>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀</button>
+    </div>
+  </header>
+
+  <!-- ===== 메인 ===== -->
+  <div class="main">
+    <div class="page-title">신작 게임 랭킹</div>
+    <div class="page-sub">스팀 기준 · 최근 90일 이내 출시작 · 실시간 업데이트</div>
+
+    <!-- 필터 컨트롤 -->
+    <div class="controls">
+
+      <!-- 기간 탭 -->
+      <div class="tab-group">
+        <button class="tab active" onclick="setPeriod('weekly', this)">주간</button>
+        <button class="tab" onclick="setPeriod('monthly', this)">월간</button>
+        <button class="tab" onclick="setPeriod('all', this)">전체</button>
+      </div>
+
+      <!-- 장르 필터 -->
+      <div class="genre-tabs">
+        <button class="genre-tag active" onclick="setGenre('all', this)">전체</button>
+        <button class="genre-tag" onclick="setGenre('shooter', this)">🔫 슈팅</button>
+        <button class="genre-tag" onclick="setGenre('survival', this)">🏕 생존</button>
+        <button class="genre-tag" onclick="setGenre('strategy', this)">♟ 전략</button>
+        <button class="genre-tag" onclick="setGenre('rpg', this)">⚔ RPG</button>
+        <button class="genre-tag" onclick="setGenre('action', this)">⚡ 액션</button>
+      </div>
+    </div>
+
+    <!-- 랭킹 테이블 -->
+    <div class="rank-table">
+      <div class="rank-header">
+        <div>#</div>
+        <div>게임</div>
+        <div>동시접속자</div>
+        <div>판매량</div>
+        <div class="col-hide">평점</div>
+        <div>순위변동</div>
+      </div>
+      <div id="rankList"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
